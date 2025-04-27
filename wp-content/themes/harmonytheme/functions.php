@@ -65,3 +65,45 @@ function my_sidebars()
 	);
 }
 add_action('widgets_init','my_sidebars');
+
+
+// Post type test
+function my_first_post_type()
+{
+	$args = array(
+		'labels' => array(
+
+					'name' => 'Bracelets',
+					'singular_name' => 'Bracelet',
+		),
+		'hierarchical' => true,
+		'public' => true,
+		'has_archive' => true,
+		'menu_icon' => 'dashicons-images-alt2',
+		'supports' => array('title', 'editor', 'thumbnail','custom-fields'),
+		//'rewrite' => array('slug' => 'bracelets'),	
+
+	);
+	register_post_type('bracelets', $args);
+
+}
+add_action('init', 'my_first_post_type');
+
+
+function my_first_taxonomy()
+{
+	$args = array(
+
+			'labels' => array(
+					'name' => 'Marques',
+					'singular_name' => 'Marque',
+			),
+
+			'public' => true,
+			'hierarchical' => true,
+
+	);
+	register_taxonomy('marques', array('bracelets'), $args);
+}
+add_action('init', 'my_first_taxonomy');
+
